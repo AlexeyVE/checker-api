@@ -1,0 +1,92 @@
+[
+  {
+    "_id": "5ef59dffa7f7613d9eee522d",
+    "name": "Nichole Whitaker",
+    "gender": "female",
+    "company": "REVERSUS",
+    "email": "nicholewhitaker@reversus.com",
+    "photoURL": "https://randomuser.me/api/portraits/women/50.jpg",
+    "role": "admin"
+  },
+  {
+    "_id": "5ef59dff5908d4aa3e7d52da",
+    "name": "Phillips Jones",
+    "gender": "male",
+    "company": "ACLIMA",
+    "email": "phillipsjones@aclima.com",
+    "photoURL": "https://randomuser.me/api/portraits/women/29.jpg",
+    "role": "guest"
+  },
+  {
+    "_id": "5ef59dff1a954f3d60de319a",
+    "name": "Fitzgerald Hawkins",
+    "gender": "male",
+    "company": "YURTURE",
+    "email": "fitzgeraldhawkins@yurture.com",
+    "photoURL": "https://randomuser.me/api/portraits/women/36.jpg",
+    "role": "admin"
+  },
+  {
+    "_id": "5ef59dff28236cf42688fc80",
+    "name": "Ines Ferguson",
+    "gender": "female",
+    "company": "APEXTRI",
+    "email": "inesferguson@apextri.com",
+    "photoURL": "https://randomuser.me/api/portraits/women/39.jpg",
+    "role": "guest"
+  },
+  {
+    "_id": "5ef59dffd7b7d53e095fba4f",
+    "name": "Mckenzie Hooper",
+    "gender": "male",
+    "company": "STEELFAB",
+    "email": "mckenziehooper@steelfab.com",
+    "photoURL": "https://randomuser.me/api/portraits/women/47.jpg",
+    "role": "guest"
+  },
+  {
+    "_id": "5ef59dffb1b697d0597da73d",
+    "name": "Dolores Mejia",
+    "gender": "female",
+    "company": "KOOGLE",
+    "email": "doloresmejia@koogle.com",
+    "photoURL": "https://randomuser.me/api/portraits/women/39.jpg",
+    "role": "user"
+  },
+  {
+    "_id": "5ef59dff999e9c2822a1cd22",
+    "name": "Stout Dalton",
+    "gender": "male",
+    "company": "FLUM",
+    "email": "stoutdalton@flum.com",
+    "photoURL": "https://randomuser.me/api/portraits/women/51.jpg",
+    "role": "admin"
+  },
+  {
+    "_id": "5ef59dff3de404ee2a04ade9",
+    "name": "Mosley Strickland",
+    "gender": "male",
+    "company": "ZEDALIS",
+    "email": "mosleystrickland@zedalis.com",
+    "photoURL": "https://randomuser.me/api/portraits/women/31.jpg",
+    "role": "admin"
+  },
+  {
+    "_id": "5ef59dff5847d96aee995955",
+    "name": "Cote Joyner",
+    "gender": "male",
+    "company": "CONJURICA",
+    "email": "cotejoyner@conjurica.com",
+    "photoURL": "https://randomuser.me/api/portraits/women/49.jpg",
+    "role": "guest"
+  },
+  {
+    "_id": "5ef59dff1eb4b084006b5e4a",
+    "name": "Jenny Schwartz",
+    "gender": "female",
+    "company": "DREAMIA",
+    "email": "jennyschwartz@dreamia.com",
+    "photoURL": "https://randomuser.me/api/portraits/women/40.jpg",
+    "role": "user"
+  }
+]

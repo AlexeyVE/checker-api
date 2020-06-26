@@ -3,14 +3,14 @@ import { __catchAsync, __AppError, __filteredObj } from '../utils';
 
 const factory = require('./handlerFactory');
 
-export const getMe = (req, res, next) => {
-  req.params.id = req.user.id;
-  next()
-};
 
 export const getAllUsers = factory.getAll(User)
 export const getUser = factory.getOne(User)
 
+export const getMe = (req, res, next) => {
+  req.params.id = req.user.id;
+  next()
+};
 // export const getAllUsers = __catchAsync(async (req, res, next) => {
 //   const users = await User.find();
 //   // res.status(500).json({

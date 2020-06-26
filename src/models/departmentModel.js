@@ -30,6 +30,7 @@ const DepartmentSchema = new mongoose.Schema({
   toObject: {virtuals: true}
 });
 
+// DepartmentSchema.index({title:1}) //req 1 res -1
 // DepartmentSchema.pre('save', async function(next) {
 //   const usersPromises = this.users.map(async id => await User.findById(id));
 //   this.users = await Promise.all(usersPromises);

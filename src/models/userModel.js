@@ -18,7 +18,7 @@ const UserSchema = new mongoose.Schema({
   },
   password: {
     type: String,
-    required: [true, "Введіть пароль"],
+    required: [true, "Введіть пароль!"],
     minlength:[8, "Пароль має містити мінімум 8 символів!"],
     select: false
   },
@@ -32,6 +32,10 @@ const UserSchema = new mongoose.Schema({
       },
       message:"Паролі не співпадають!"
     }
+  },
+  active: {
+    type: Boolean,
+    default: true
   },
   role: {
     type: String,
