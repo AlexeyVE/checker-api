@@ -82,10 +82,13 @@ export const login = __catchAsync(async (req, res, next) => {
 export const protect = __catchAsync(async (req, res, next) => {
   // 1) Getting token and check of it's there
   let token 
-  // = req.headers.authorization;
   
   if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
     token = req.headers.authorization.split(' ')[1];
+  }
+
+  else if (req.cookies.jwt) {
+    token = req.cookies.jwt;
   }
 
   if (!token) {
@@ -111,7 +114,7 @@ export const protect = __catchAsync(async (req, res, next) => {
   if (await currentUser.changedPasswordAfter(decoded.iat)) {
     return next(
       new __AppError(
-        'Користувач нещодавно змінив пароль! Будь ласка, увійдіть ще раз', 401)
+        'Користувач нещодавно змінив пароль! Будь ласка, увійдіть ще раз!', 401)
     );
   }
   // GRANT ACCESS TO PROTECTED ROUTE
@@ -119,11 +122,50 @@ export const protect = __catchAsync(async (req, res, next) => {
   next()
 });
 
+//Only for rendered pages, no errors!
+export const isLoggedIn = async (req, res, next) => {  
+  if (req.cookies.jwt) {
+    try {
+      // 1) Verify token
+      const decoded = await promisify(jwt.verify)(
+      req.cookies.jwt,
+      process.env.JWT_SECRET
+    );  
+      // 2) Check if user still exists
+      const currentUser = await User.findById(decoded.id);
+      if (!currentUser) {
+        return next();
+      } 
+      // 3) Check if user changed password after the token was issued
+      if (await currentUser.changedPasswordAfter(decoded.iat)) {
+        return next();
+      }
+      // THERE IS A LOOGED IN USER
+      res.locals.user = currentUser;
+      return next();
+    } catch (err) {
+      return next()
+    }   
+  }
+  next();    
+};
+
+export const logout = (req, res) => {
+  res.cookie('jwt', 'Logout cookie', {
+    expires: new Date(Date.now() + 10 * 1000),
+    httpOnly: true
+  });
+  res.status(200).json({
+    action: 'Logout',
+    statusCode: 0
+  })
+};
+
 export const restrictTo = (...roles) => {
   return (req, res, next) => {
     //roles['admin', 'user', 'guest'].role='guest'
     if (!roles.includes(req.user.role)) {
-      return next(new __AppError('Ви не маєте дозволу на здійснення цієї дії', 403))
+      return next(new __AppError('Ви не маєте дозволу на здійснення цієї дії!', 403))
     }
     next();
   };
@@ -146,7 +188,7 @@ export const forgotPassword = __catchAsync(async (req, res, next) => {
   try {
     await __sendEmail({
       email: user.email,
-      subject: `Ваш токен скидання пароля(дійсний 10хв)`,
+      subject: `Ваш токен скидання пароля(дійсний 10хв).`,
       message
     });
     res.status(200).json({
@@ -159,7 +201,7 @@ export const forgotPassword = __catchAsync(async (req, res, next) => {
     await user.save({validateBeforeSave: false});
     return next(
       new __AppError(
-      'Під час надсилання листа сталася помилка. Повторіть спробу пізніше.', 
+      'Під час надсилання листа сталася помилка! Повторіть спробу пізніше!', 
       500)
     );
   }
@@ -200,7 +242,7 @@ export const updatePassword = __catchAsync( async (req, res, next) => {
   const user = await User.findById(req.user._id).select('+password');
   // 2) Check if POSTed current password is correct
   if (!(await user.correctPassword(req.body.passwordCurrent, user.password))) {
-    return next(new __AppError('Ваш поточний пароль неправильний', 401))
+    return next(new __AppError('Ваш поточний пароль неправильний!', 401))
   }
   // 3) If so, update password
   user.password = req.body.password;

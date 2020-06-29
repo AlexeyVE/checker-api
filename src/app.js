@@ -7,6 +7,7 @@ import xss from 'xss-clean';
 import hpp from 'hpp';
 import dotenv from 'dotenv';
 import morgan from 'morgan';
+import cookieParser from 'cookie-parser';
 
 import { __AppError } from './utils';
 import globalErrorHandler from './controllers/errorController';
@@ -23,9 +24,8 @@ app.use(helmet());
 
 // Development loggin
 if (process.env.NODE_ENV === "development") {
-  app.use(morgan('dev'));
+  app.use(morgan(':method :url :status :res[content-length] - :response-time ms'));
 };
-
 // Limit request from same API 
 const limiter = rateLimit({
   max: 100,
@@ -37,6 +37,8 @@ app.use('/api', limiter);
 
 //Body parser, read data from body into req.body
 app.use(express.json({limit: '10kb'}));
+
+app.use(cookieParser());
 // app.use(express.json());
 //Data sanitization against NoSQL query injection
 app.use(emSanitize());
